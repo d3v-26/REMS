@@ -1,0 +1,69 @@
+﻿@model IEnumerable<REMS.Models.PropertyModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+@if (ViewBag.notempty)
+{
+    <h1>Your Properties</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.name)
+                </th>            
+                <th>
+                    @Html.DisplayNameFor(model => model.propertyType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.price)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model)
+    {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.propertyType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.price)
+                </td>
+                <td>
+                    @if (item.propertyMode == PropertyMode.Rent)
+                    {
+                        <a asp-action="RentDetails" asp-route-id="@item.id">Details</a>
+                    }
+                    else
+                    {
+                        <a asp-action="SellDetails" asp-route-id="@item.id">Details</a>
+                    }
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+}
+else
+{
+    <img src="https://s3-ap-south-1.amazonaws.com/myims.imsindia.com/wp-content/themes/ims/img/Error-404.png" height="146" width="204" alt="Error-404" />
+    <div class="alert alert-danger">Looks Like You haven't Purchased Any Properties. <a asp-action="Rent">Browse Catalog</a></div>
+}

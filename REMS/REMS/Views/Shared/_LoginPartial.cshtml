@@ -1,0 +1,116 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<ul class="navbar-nav">
+@if (SignInManager.IsSignedIn(User))
+{
+    @if (User.IsInRole("Admin"))
+    {
+        <li class="nav-item">
+            <a  class="nav-link" asp-action="Index" asp-controller="AgentModels" title="Agents">Manage Agents</a>
+        </li>
+    }
+    @if(User.IsInRole("Admin") || User.IsInRole("Agent"))
+    {
+        <li class="nav-item">
+            <a class="nav-link" asp-action="Index" asp-controller="PropertyModels" title="Properties">Manage Properties</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-mdb-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Browse Properties
+          </a>
+          <!-- Dropdown menu -->
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" asp-action="Rent" asp-controller="Property">Browse Properties To Rent</a></li>
+            <li><a class="dropdown-item"  asp-action="Sell" asp-controller="Property">Browse Properties To Sell</a></li>    
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a class="dropdown-item" asp-action="Index" asp-controller="Property">Your Properties</a>
+            </li>
+          </ul>
+        </li>
+    }
+    @if (User.IsInRole("Seller"))
+    {
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-mdb-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Browse
+          </a>
+          <!-- Dropdown menu -->
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" asp-action="Rent" asp-controller="Property">Browse Properties To Rent</a></li>
+              <li><a class="dropdown-item" asp-action="Sell" asp-controller="Property">Browse Properties To Sell</a></li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                  <a class="dropdown-item" asp-action="Index" asp-controller="Property">Your Properties</a>
+              </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+            <a  class="nav-link" asp-action="Index" asp-controller="RentPropertyModels" title="Agents">Manage Properties to Rent</a>
+        </li>
+        <li class="nav-item">
+            <a  class="nav-link" asp-action="Index" asp-controller="SellPropertyModels" title="Agents">Manage Properties to Sell</a>
+        </li>
+    }
+    @if (User.IsInRole("Customer"))
+    {
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-mdb-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Browse
+          </a>
+          <!-- Dropdown menu -->
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" asp-action="Rent" asp-controller="Property">Browse Properties To Rent</a></li>
+              <li><a class="dropdown-item" asp-action="Sell" asp-controller="Property">Browse Properties To Sell</a></li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                  <a class="dropdown-item" asp-action="Index" asp-controller="Property">Your Properties</a>
+              </li>
+          </ul>
+        </li>        
+        <li class="nav-item">
+            <a  class="nav-link" asp-action="Convert" asp-controller="Property" title="Agents">Register As Premium User</a>
+        </li>
+    }
+    <li class="nav-item">
+        <a  class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
+    </li>
+    <li class="nav-item">
+        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button  type="submit" class="nav-link btn btn-link">Logout</button>
+        </form>
+    </li>
+}
+else
+{
+    <li class="nav-item">
+        <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Register</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">Login</a>
+    </li>
+}
+</ul>

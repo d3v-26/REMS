@@ -1,0 +1,5 @@
+﻿<h1>You are Now A Premium User</h1>
+<h3>To Access Your Premium Account Login Again</h3>
+<form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+    <button type="submit" class="btn btn-danger">Logout</button>
+</form>

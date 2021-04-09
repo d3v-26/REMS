@@ -1,0 +1,98 @@
+﻿@model IEnumerable<REMS.Models.PropertyModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<div>
+    <form asp-action="Index" method="get">
+        <div class="form-actions no-color">
+            <p>
+                <div class="input-group">
+                    <div class="form-outline">
+                        <input type="search" id="form1" name="SearchString" class="form-control" value="@ViewData["CurrentFilter"]" />
+                        <label class="form-label" for="form1">Search</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    @if (ViewBag.visible == true)
+                    {
+                        <a asp-action="Index" class="mx-2">Back To Full List</a>
+                    }
+                </div>                                
+            </p>
+        </div>
+    </form>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>            
+            <th>
+                @Html.DisplayNameFor(model => model.propertyType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.propertyMode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.propertyStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.propertyDetail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.owner)
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>            
+            <td>
+                @Html.DisplayFor(modelItem => item.propertyType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.propertyMode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.propertyStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.propertyDetail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.owner)
+            </td>
+            <td>
+                <a asp-action="Verify" class="btn btn-primary btn-floating" asp-route-id="@item.id"><i class="fas fa-check"></i></a>
+                <a asp-action="Unfit" class="btn btn-danger btn-floating" asp-route-id="@item.id"><i class="fas fa-times"></i></a>
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.id">Details</a>                
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
