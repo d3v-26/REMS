@@ -13,7 +13,7 @@ A complete version of Real Estate Management System made using Asp.net core, SQL
 - Verification of your properties
 - Manage Agents
 - Comments on properties for Information.
-- Full Authentication (includes signup, login, forgot password, )
+- Full Authentication (includes signup, login, forgot password, email verification )
 ### Installation
 
 Clone the repository:
